@@ -15,9 +15,7 @@ def substrings1(text, array_of_substrings)
   words_in_text=text.split(" ")
   array_of_substrings.reduce(Hash.new(0)) do |result_hash, substring|
     words_in_text.each do |word|
-      if word.downcase.include?(substring.downcase)
-        result_hash[substring] += 1 
-      end
+      result_hash[substring] += 1 if word.downcase.include?(substring.downcase)
     end
     result_hash
   end
