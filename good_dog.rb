@@ -1,8 +1,10 @@
-# module Speak
-#   def speak(sound)
-#     puts "#{sound}"
-#   end
-# end
+module Swimmable #add "able" suffix to verb for module name
+  def swim
+    "I'm swimming!"
+  end
+end
+
+
 
 class Animal
   attr_accessor :name
@@ -14,6 +16,18 @@ class Animal
   def speak
     "Hello!"
   end
+end
+
+class Fish < Animal
+  include Swimmable #mix in =mix-in of modules in class
+end
+
+class Mammal <Animal 
+  
+end
+
+class Dog < Mammal
+  include Swimmable #mix in =mix-in of modules in class
 end
 
 class Cat < Animal  
@@ -36,16 +50,16 @@ class GoodDog < Animal
   @@number_of_dogs=0
 
   def initialize(n, h, w, a)
-    @name=n
-    self.age=a*DOG_YEARS
-    @height=h
+    super(n) #super() calls method in superclass with no argument. If superclass method takes no argument but subclass passes arguments, this is the way to call.
+    @height=h #instance variable declaration
     @weight=w
-    @@number_of_dogs+=1
+    self.age=a*DOG_YEARS #calls setter method with self
+    @@number_of_dogs+=1 #class variable @@, in global class scope
   end
   
   # include Speak
   def speak
-    super+", #{name} says Arf! from GoodDog class"
+    super()+", #{name} says Arf! from GoodDog class"
   end
 
   def change_info(n, h, w, a)
@@ -104,6 +118,12 @@ p sparky.what_is_self
 paws=Cat.new("Brown")
 puts paws.speak
 p paws
+some_dog=Dog.new("Bony")
+puts some_dog.name
+puts some_dog.swim
+some_fish=Fish.new("Nemo")
+puts some_fish.name
+puts some_fish.swim
 
 # bob=HumanBeing.new
 # bob.speak("Hello!")
