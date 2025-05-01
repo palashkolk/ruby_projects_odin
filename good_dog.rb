@@ -8,11 +8,11 @@ class GoodDog
   def initialize(name)
     @name=name
   end
-  def get_name
+  def name
     @name
   end
 
-  def set_name=(name)
+  def name=(name)
     @name=name
   end
   # include Speak
@@ -27,9 +27,9 @@ end
 
 sparky=GoodDog.new("sparky")
 puts sparky.speak
-puts sparky.get_name
-sparky.set_name= "Spartacus"
-puts sparky.get_name
+puts sparky.name
+puts sparky.name= "Spartacus"
+puts sparky.name
 # sparky.speak("woof!")
 fido =GoodDog.new("fido")
 puts fido.speak
