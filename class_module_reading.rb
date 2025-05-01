@@ -15,9 +15,10 @@ class Passenger
 end
 
 class Car
+  # Container "has -a" composed object and also "has-an" aggregated object.
   def initialize(passengers)
-    @engine=Engine.new
-    @passengers=passengers
+    @engine=Engine.new   #composed object, Engine dies with Car and is created with Car
+    @passengers=passengers  # Aggregated object, Passenger lives independently even if Car dies
 
   end
 
