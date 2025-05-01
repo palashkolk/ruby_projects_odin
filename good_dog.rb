@@ -5,19 +5,27 @@
 # end
 
 class GoodDog
-  def initialize(name)
-    @name=name
-  end
-  def name
-    @name
-  end
+  attr_accessor :name, :weight, :height
 
-  def name=(name)
-    @name=name
+  def initialize(n, h, w)
+    @name=n
+    @height=h
+    @weight=w
   end
+  
   # include Speak
   def speak
-    "#{@name} says Arf!"
+    "#{name} says Arf!"
+  end
+
+  def change_info(n, h, w)
+    self.name=n
+    self.height=h
+    self.weight=w
+  end
+
+  def info
+    "#{name} weighs #{weight} and is #{height} tall"
   end
 end
 
@@ -25,14 +33,20 @@ end
 #   include Speak
 # end
 
-sparky=GoodDog.new("sparky")
+sparky=GoodDog.new("sparky", "12 inches", "10 lbs")
 puts sparky.speak
 puts sparky.name
-puts sparky.name= "Spartacus"
+
+puts sparky.info 
+sparky.change_info('Spartacus', '24 inches', '45 lbs')
+puts sparky.info
+# puts sparky.name= "Spartacus"
 puts sparky.name
 # sparky.speak("woof!")
-fido =GoodDog.new("fido")
+fido =GoodDog.new("fido", "18 inches", "15 lbs")
 puts fido.speak
+
+
 # bob=HumanBeing.new
 # bob.speak("Hello!")
 # puts "-------GoodDog ancestor-----------"
