@@ -28,6 +28,11 @@ class MyCar
     self.color=color1
     "Your car is now #{color} coloured"
   end
+
+  def calculate_mileage(kilometer, litre)
+    mileage=kilometer/litre
+    puts "#{mileage} km per litre is the mileage"
+  end
 end
 
 my_car=MyCar.new(2018, "cherry", "Hyundai Santro")
@@ -42,5 +47,6 @@ puts my_car.color
 puts my_car.model
 my_car.model="Hyundai Grand i10"
 puts my_car.model
-my_car.year=2013
+# my_car.year=2013
 puts my_car.year
+puts my_car.calculate_mileage(80, 5)

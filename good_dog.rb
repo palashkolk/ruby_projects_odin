@@ -5,6 +5,8 @@
 # end
 
 class GoodDog
+
+  puts self # shows that self is the class GoodDog itself when in global scope of class
   DOG_YEARS=7
   attr_accessor :name, :weight, :height, :age
 
@@ -44,6 +46,10 @@ class GoodDog
 
   def to_s
     "This dog's name is #{name} and it is #{age} in dog years"
+    #Method should always return string. Otherwise method override won't work as expected.One should also keep note of the returned value in puts argument on which to_s will be applied. If it is not the correct object then the overriding to_s may not work and instead Object#to_s may be called.
+  end
+  def what_is_self
+    self # shows that self is the instance itself when in local scope of instance methods. self sees the immediate scope.
   end
 end
 
@@ -69,7 +75,9 @@ GoodDog.new("Kanu", "125inches", "20 lbs", 1.5)
 puts GoodDog.total_number_of_dogs
 puts "#{fido.name} is #{fido.age} years old" 
 puts sparky #equivalent to puts sparky.to_s
-
+p sparky
+"#{sparky}" #string interpolation also calls to_s on argument
+p sparky.what_is_self
 
 
 # bob=HumanBeing.new
