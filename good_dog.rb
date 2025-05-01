@@ -4,7 +4,30 @@
 #   end
 # end
 
-class GoodDog
+class Animal
+  attr_accessor :name
+
+  def initialize(name)
+    @name=name
+  end
+
+  def speak
+    "Hello!"
+  end
+end
+
+class Cat < Animal  
+  def initialize(color)
+    super
+    @color=color
+  end
+
+  def speak
+    super+ ", #{name} says meow from Cat class!"
+  end
+end
+
+class GoodDog < Animal
 
   puts self # shows that self is the class GoodDog itself when in global scope of class
   DOG_YEARS=7
@@ -22,7 +45,7 @@ class GoodDog
   
   # include Speak
   def speak
-    "#{name} says Arf!"
+    super+", #{name} says Arf! from GoodDog class"
   end
 
   def change_info(n, h, w, a)
@@ -78,7 +101,9 @@ puts sparky #equivalent to puts sparky.to_s
 p sparky
 "#{sparky}" #string interpolation also calls to_s on argument
 p sparky.what_is_self
-
+paws=Cat.new("Brown")
+puts paws.speak
+p paws
 
 # bob=HumanBeing.new
 # bob.speak("Hello!")
