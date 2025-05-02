@@ -1,10 +1,38 @@
+# Use class inheritance in case of "is-a relationship". Use module mixin for "has-a" relationship
+
 module Swimmable #add "able" suffix to verb for module name
   def swim
     "I'm swimming!"
   end
 end
 
+module Climbable
+  def climb
+    "I'm climbing."
+  end
+end
 
+#Namespacing of classes using modules (Gathering simil;ar classes in a single module; stops colliding similarly named classes)
+module Mammal_animals
+  class Horse
+    def speak(sound)
+      p "#{sound}"
+    end
+  end
+
+  class Goat
+    def say_name(name)
+      p "#{name}"
+    end
+  end
+end
+
+#Module as container for methods
+module Conversions
+  def self.farenheit_to_celsius(num)
+    (num - 32) * 5 / 9
+  end
+end
 
 class Animal
   attr_accessor :name
@@ -28,6 +56,7 @@ end
 
 class Dog < Mammal
   include Swimmable #mix in =mix-in of modules in class
+  include Climbable # last module is searched first for methods
 end
 
 class Cat < Animal  
@@ -88,6 +117,19 @@ class GoodDog < Animal
   def what_is_self
     self # shows that self is the instance itself when in local scope of instance methods. self sees the immediate scope.
   end
+  #Method access control
+  #Access modifiers: private, public, protected. All above methods in the GoodDog class are public methods. Sometimes there will be methods which will work but may not available to other rest of the program. These are private methods.
+  
+  def public_disclosure
+    "#{name} in human years is #{human_years}" #self.human_years is not allowed as human_years in private method. private methods are not available outside class definition
+  end
+
+  private # anything below it is private
+
+  def human_years
+    age*DOG_YEARS
+  end
+
 end
 
 # class HumanBeing
@@ -115,6 +157,8 @@ puts sparky #equivalent to puts sparky.to_s
 p sparky
 "#{sparky}" #string interpolation also calls to_s on argument
 p sparky.what_is_self
+puts sparky.public_disclosure
+
 paws=Cat.new("Brown")
 puts paws.speak
 p paws
@@ -124,6 +168,19 @@ puts some_dog.swim
 some_fish=Fish.new("Nemo")
 puts some_fish.name
 puts some_fish.swim
+
+puts "---Dog method lookup---"
+puts Dog.ancestors
+
+buddy = Mammal_animals::Horse.new
+kitty = Mammal_animals::Goat.new
+buddy.speak('neighh!')           # => "Arf!"
+kitty.say_name('kitty')       # => "kitty"
+
+value = Conversions::farenheit_to_celsius(32)#Two ways of calling methods from container modules
+puts value
+value = Conversions.farenheit_to_celsius(212)
+puts value
 
 # bob=HumanBeing.new
 # bob.speak("Hello!")
